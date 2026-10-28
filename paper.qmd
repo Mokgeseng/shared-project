@@ -14,6 +14,9 @@ Flipper length varied by species [@wickham2016].
 #| fig-cap: "Flipper length by species."
 library(ggplot2)
 ggplot(penguins, aes(species, flipper_len)) + geom_jitter()
+toBibtex(citation())            # R itself
+toBibtex(citation("ggplot2"))   # a package
 ```
 
 The mean was `r round(median(penguins$flipper_len, na.rm = TRUE), 1)` mm (@fig-flippers).
+
