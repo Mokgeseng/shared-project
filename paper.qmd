@@ -1,0 +1,19 @@
+---
+title: "My first reproducible article"
+author: "Your Name"
+format: html
+bibliography: references.bib
+---
+
+## Results
+
+Flipper length varied by species [@wickham2016].
+
+```{r}
+#| label: fig-flippers
+#| fig-cap: "Flipper length by species."
+library(ggplot2)
+ggplot(penguins, aes(species, flipper_len)) + geom_jitter()
+```
+
+The mean was `r round(median(penguins$flipper_len, na.rm = TRUE), 1)` mm (@fig-flippers).
