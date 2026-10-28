@@ -9,14 +9,35 @@ bibliography: references.bib
 
 Flipper length varied by species [@wickham2016].
 
+The mean was `r round(median(penguins$flipper_len, na.rm = TRUE), 1)` mm (@fig-flippers).
+
 ```{r}
 #| label: fig-flippers
 #| fig-cap: "Flipper length by species."
+#| fig-width: 3.5
+#| fig-height: 5.5
+#| out-width: 80%
+#| fig-align: center
+
+library(forcats)
 library(ggplot2)
-ggplot(penguins, aes(species, flipper_len)) + geom_jitter()
-toBibtex(citation())            # R itself
-toBibtex(citation("ggplot2"))   # a package
+library(dplyr)
+
+txhousing_price <- txhousing |> 
+  group_by(city) |>
+  summarise(price_m = median(median, na.rm=TRUE),
+            price_q3 = quantile(median, 0.75, na.rm=TRUE),
+            price_q1 = quantile(median, 0.25, na.rm=TRUE)) 
+
+ggplot(txhousing_price, ) +
+  geom_point(aes(x=fct_reorder(city, price_m), 
+                 y=price_m)) +
+  geom_errorbar(aes(x=fct_reorder(city, price_m), 
+                    ymin=price_q1, 
+                    ymax=price_q3), width=0) +
+  scale_y_continuous("Median price ($ thousands)", 
+                     breaks=c(100000, 150000, 200000), 
+                     labels=c("100", "150", "200")) +
+  xlab("") + 
+  coord_flip()
 ```
-
-The mean was `r round(median(penguins$flipper_len, na.rm = TRUE), 1)` mm (@fig-flippers).
-
