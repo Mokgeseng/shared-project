@@ -12,12 +12,13 @@ Flipper length varied by species [@wickham2016].
 The mean was `r round(median(penguins$flipper_len, na.rm = TRUE), 1)` mm (@fig-flippers).
 
 ```{r}
-#| label: fig-flippers
-#| fig-cap: "Flipper length by species."
+#| label: fig-prices
+#| fig-cap: "The median housing prices in Texas with the variation visualised by the bars"
 #| fig-width: 3.5
 #| fig-height: 5.5
 #| out-width: 80%
 #| fig-align: center
+#| fig-alt: "IQR plot, the median housing prices and their IQR, the medians are plotted in decending order of the median prices. Starting from x to y."
 
 library(forcats)
 library(ggplot2)
